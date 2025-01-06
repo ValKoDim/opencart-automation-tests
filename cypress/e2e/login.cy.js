@@ -1,4 +1,5 @@
 import loginPage from '../support/pageObjects/loginPage';
+import accountPage from '../support/pageObjects/accountPage';
 let user;
 
 describe('Login', () => {
@@ -21,5 +22,16 @@ describe('Login', () => {
         loginPage.enterPassword('invalidPassword');
         loginPage.elements.getSubmitBtn().click();
         cy.get('.alert-danger').should('be.visible');
+    });
+    it('Login with empty email and password', () => {
+        loginPage.elements.getSubmitBtn().click();
+        cy.get('.alert-danger').should('be.visible');
+    });
+    it('Logout', () => {
+        loginPage.enterEmail(user.email);
+        loginPage.enterPassword(user.password);
+        loginPage.elements.getSubmitBtn().click();
+        accountPage.elements.getLogoutBtn().click({force:true});
+        accountPage.elements.getLogoutMsg().should('be.visible',{timeout:10000});
     });
 })
