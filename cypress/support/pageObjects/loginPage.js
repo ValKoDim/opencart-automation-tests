@@ -5,6 +5,7 @@ class loginPage {
         getSubmitBtn: () => cy.get('button[type="submit"]'),
         getForgottenPwdLnk: () => cy.contains('a', 'Forgotten Password'),
         getLogoutBtn: () => cy.contains('a.list-group-item', 'Logout'),
+        getSuccessfulPwdResetMsg: () => cy.get('.alert-success'),
     };
 
     navigate(){
