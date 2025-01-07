@@ -11,6 +11,7 @@ class registrationPage {
         getErrEmail: () => cy.get('#error-email'),
         getErrPassword: () => cy.get('#error-password'),
         getSuccessMsg: () => cy.contains('h1', 'Your Account Has Been Created!'),
+        getPrivacyPolicyErr: () => cy.get('.alert-danger'),
     };
 
     navigate(){

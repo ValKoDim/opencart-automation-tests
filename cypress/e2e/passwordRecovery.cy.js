@@ -5,13 +5,15 @@ let user;
 describe('Password recovery', () => {
     before(() => {
         cy.fixture('singleUserData').then((data) => {
-            user = data;
+            user = data[0];
         })
     });
     beforeEach(() => {
         forgotenPasswordPage.navigate();
     });
-
+    afterEach(() => {
+        cy.wait(1000);
+    });
     it('Successful password recovery', () => {
         forgotenPasswordPage.enterEmail(user.email)
         forgotenPasswordPage.elements.getContinueBtn().click();

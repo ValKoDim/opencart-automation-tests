@@ -5,16 +5,17 @@ let user;
 describe('Login', () => {
     before(() => {
         cy.fixture('singleUserData').then((data) => {
-            user = data;
+            user = data[0];
         });
     })
     beforeEach(() => {
         loginPage.navigate();
     });
+    afterEach(() => {
+        cy.wait(1000);
+    });
     it('Check login with valid credentials', () => {
-        loginPage.enterEmail(user.email);
-        loginPage.enterPassword(user.password);
-        loginPage.elements.getSubmitBtn().click();
+        loginPage.loginUser(user.email, user.password);
         loginPage.elements.getLogoutBtn().should('be.visible');
     });
     it('Check login with invalid credentials', () => {
@@ -28,9 +29,7 @@ describe('Login', () => {
         cy.get('.alert-danger').should('be.visible');
     });
     it('Logout', () => {
-        loginPage.enterEmail(user.email);
-        loginPage.enterPassword(user.password);
-        loginPage.elements.getSubmitBtn().click();
+        loginPage.loginUser(user.email, user.password);
         accountPage.elements.getLogoutBtn().click({force:true});
         accountPage.elements.getLogoutMsg().should('be.visible',{timeout:10000});
     });

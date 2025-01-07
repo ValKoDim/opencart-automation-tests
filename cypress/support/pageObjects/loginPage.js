@@ -19,5 +19,11 @@ class loginPage {
     enterPassword(password){
         this.elements.getPasswordInpt().type(password);
     }
+
+    loginUser(email, password){
+        this.enterEmail(email);
+        this.enterPassword(password);
+        this.elements.getSubmitBtn().click();
+    }
 }
 export default new loginPage();
